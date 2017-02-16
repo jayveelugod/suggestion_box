@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Suggestion Box</title>
+    <%= favicon_link_tag 'rails.png' %>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <%= link_to 'Suggestion Box', topics_path, class: "navbar-brand navbar-left" %>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                    	<button><%= link_to 'New Topic', new_topic_path %></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header id="myCarousel" class="carousel slide">
+        <%= yield %>
+    </header>
+    <div class="portfolio-modal modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <center>
+	                <div class="modal-header">
+	                    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+	                    <h2></h2>
+	                 </div>    
+	                <br>
+	                <button type="button" class="btn btn-primary btn-right" data-dismiss="modal"><i class="fa fa-times"></i> Got It</button>
+	                <br><br>
+	            </center>
+	        </div>
+	    </div>
+	</div>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		if($("#notice").html() != undefined){
+    			if($("#notice").html().split('+')[0] == ""){
+		    		$("#"+$("#firstID").html()).addClass('active');	
+		    	}else if($("#notice").html().split('+')[0].length > 5 || $("#notice").html() == 'Topic Deletion Successful!'){
+		    		$("#"+$("#lastID").html()).addClass('active');
+		    	}else{
+		    		$("#"+$("#notice").html().split('+')[0]).addClass('active');
+	    		}
+	    		var confirmation = '';
+	    		if($("#notice").html().split('+')[1] != undefined){
+	    			confirmation = $("#notice").html().split('+')[1];
+	    		}else if ($("#notice").html().split('+')[0].length > 5){
+	    			confirmation = $("#notice").html().split('+')[0];
+	    		}else if ($("#notice").html() == 'Topic Deletion Successful!'){
+	    			confirmation = 'Topic Deletion Successful!';
+	    		}
+	    		if(confirmation != ''){
+	    			$("#messageModal .modal-header h2").html(confirmation);
+	    			$("#messageModal").modal('show');
+	    		}
+    		}
+	    	$(".edit_topic input[type=submit], .new_topic input[type=submit]").addClass('btn btn-primary');
+	    	$("#addVote input[type=submit]").addClass('btn btn-secondary btn-success');
+	    	$(".button_to input[value='Delete']").addClass('btn btn-secondary btn-danger');
+	    	$("#bs-example-navbar-collapse-1 button").addClass('btn btn-primary').css('margin-top', '1.2vh');
+	    	$("#new_topic #topic_title, #new_topic #topic_description, #edit_topic_2 #topic_title, #edit_topic_2 #topic_description").attr('required', true);
+	    	$("#new_topic #topic_title, #edit_topic_2 #topic_title").attr('placeholder', 'Topic Title here...');
+	    	$("#new_topic #topic_description, #edit_topic_2 #topic_description").attr('placeholder', 'Topic Description...');
+    	});
+    </script>
+  </body>
+</html>

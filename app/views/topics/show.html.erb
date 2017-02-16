@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<div id="topicContent2" style="text-align: center; background-color: #eee; margin-top: 8em">
+	<br>
+	<div>
+		<h1>Topic Details</h1><br>
+		<p>
+		  <span>Title:</span>
+		  <h4><%= @topic.title %></h4>
+		</p>
+		<br>
+		<p>
+		  <span>Description:</span>
+		  <h4><%= @topic.description %></h4>
+		</p>
+		<br><br>
+		<%= link_to 'Edit', edit_topic_path(@topic) %> |
+		<%= link_to 'Back', returnto_topic_path(@topic), method: :post %>
+		<br><br><br>
+	</div>
+</div>

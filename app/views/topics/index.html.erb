@@ -1,0 +1,31 @@
+<p id="firstID" hidden><%= @topics.first.id %></p>
+<p id="lastID" hidden><%= @topics.last.id %></p>
+<p id="notice" hidden><%= notice %></p>
+
+<h1 id='topics'>TOPICS</h1>
+<hr>
+<br><br><br>  
+<div class="carousel-inner">
+    <% @topics.each_with_index do |topic, index| %>
+      <div class="item" id="<%= topic.id %>">
+        <div class="fill">
+          <div id="topicContent" style="text-align: center">
+            <h2 id='topicTitle'><%= link_to topic.title, topic, title: 'View Details' %></h2>
+            <h2 id='vote'><%= pluralize(topic.votes.count, "vote") %></h2>
+            <h2 id='addVote'><%= button_to '+1', upvote_topic_path(topic), method: :post, title: 'Add Vote' %></h2>
+            <br><br><br>
+            <h2><%= button_to 'Delete', topic, method: :delete, data: { confirm: 'Delete this topic?' }, title: 'Delete Topic' %></h2>
+          </div>
+        </div>
+      </div>
+    <% end %>
+</div>
+
+<div id="controls">
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="icon-prev"></span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="icon-next"></span>
+  </a>
+</div>

@@ -1,0 +1,22 @@
+<div class="sb-modal modal fade" id="addTopic" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <center>
+                <h1>New Topic</h1>
+
+				<%= render 'form', topic: @topic %>
+				<br><br>
+				<%= link_to 'Close', topics_path %>
+				<br><br>
+            </center>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+		$("#addTopic").modal('show');
+		$("#addTopic button a").css('color', 'white');
+		$("#addTopic input[type=text], #addTopic textarea").addClass('form-control');
+		$(".form-control").css('width', '20em');
+	});
+</script>
